@@ -90,6 +90,22 @@ $(document).ready(function (){
             });
         }
 	});
+	
+	////////////
+	$("#btn-dert")[0].addEventListener("click", function(){
+	  var dert = $(".ta-dert")[0].value;
+	  console.log("Sevmeye basildi: " + dert);
+	  if (dert === '') {
+	    $("#p-dert-message")[0].innerHTML = "Bir dert girmen lazim ama...";
+	  } else {
+	    $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
+      saveDert(dert);
+    }
+  });
 
 });
+
+function saveDert(dert) {
+  console.log('Saving dert: ' + dert);  
+}
 
