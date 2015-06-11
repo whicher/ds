@@ -98,7 +98,6 @@ $(document).ready(function (){
 	  if (dert === '') {
 	    $("#p-dert-message")[0].innerHTML = "Bir dert girmen lazim ama...";
 	  } else {
-	    $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
       saveDert(dert);
     }
   });
@@ -108,11 +107,16 @@ $(document).ready(function (){
 function saveDert(dert) {
   console.log('Saving dert: ' + dert);
   jQuery.ajax({
-      type: 'PUT',
-      url: "https://glowing-heat-3755.firebaseio.com/dert",
-      data: {'dert': dert, 'tarih': new Date()},
+      type: 'POST',
+      url: "https://glowing-heat-3755.firebaseio.com/dert.json",
+      data: {"dert": dert, "tarih": new Date()},
       success: function successfulSaving() {
         console.log('Saved successfully...');
+        $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
+      },
+      fail: function failSaving() {
+        console.log('Smt wrong...');
+        $("#p-dert-message")[0].innerHTML = "Dert sevme hatasi";
       }
   });
 }
