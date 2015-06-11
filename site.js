@@ -107,5 +107,13 @@ $(document).ready(function (){
 
 function saveDert(dert) {
   console.log('Saving dert: ' + dert);  
+  jQuery.ajax({
+      type: 'PUT',
+      url: "",
+      data: {'dert': dert, 'tarih': new Date()},
+      success: function successfulSaving() {
+        console.log('Saved successfully...');
+      }
+  });
 }
 
