@@ -90,7 +90,7 @@ $(document).ready(function (){
             });
         }
 	});
-	
+
 	////////////
 	$("#btn-dert")[0].addEventListener("click", function(){
 	  var dert = $(".ta-dert")[0].value;
@@ -106,14 +106,13 @@ $(document).ready(function (){
 });
 
 function saveDert(dert) {
-  console.log('Saving dert: ' + dert);  
+  console.log('Saving dert: ' + dert);
   jQuery.ajax({
       type: 'PUT',
-      url: "/",
+      url: "https://glowing-heat-3755.firebaseio.com/dert",
       data: {'dert': dert, 'tarih': new Date()},
       success: function successfulSaving() {
         console.log('Saved successfully...');
       }
   });
 }
-
