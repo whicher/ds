@@ -151,7 +151,7 @@ function getDertById(id) {
   jQuery.ajax({
       url: "https://glowing-heat-3755.firebaseio.com/dert/" + id + ".json",
       success: function successfulSaving(data) {
-        console.log('Got derts: ' + JSON.stringify(data));
+        console.log('Got one dert: ' + JSON.stringify(data));
         appendOneDertToPage(data);
       },
       fail: function failSaving() {
@@ -169,7 +169,7 @@ function appendDertsToPage(lastDerts) {
 }
 
 function appendOneDertToPage(dert) {
-  $('#h4-one-dert').innerHTML = dert['dert'];
+  $('#sizi-gck-eden-dnyann-en-nemli-derdini-girin')[0].innerHTML = dert['dert'];
 }
 
 function getJsonFromUrl() {
