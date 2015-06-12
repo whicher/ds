@@ -32,6 +32,7 @@
         {% if page.icon %}
         <div class="subtlecircle sectiondivider imaged">
           <img src="{{page.icon}}" alt="section icon" />
+          <h4 id="h4-one-dert"></h4>
           <h5 class="icon-title">{{ page.title }}</h5>
         </div>
         {% elsif page.fa-icon %}
@@ -46,9 +47,16 @@
         <div class="container {{ page.style }}">
           {{ page.content }}
         </div>
+
+        <div class="div-last-derts">
+          <ul class="ul-last-derts">
+
+          </ul>
+        </div>
       </div>
       {% break %}
     {% endfor %}
+
 
 
     <div id="footer" class="section text-white">
