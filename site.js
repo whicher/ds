@@ -126,17 +126,19 @@ function saveDert(dert) {
       success: function successfulSaving(data) {
         console.log('Saved successfully...' + JSON.stringify(data));
         $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
+        $('.ul-last-derts').prepend($('<li><a href="dert/?q='+ data + '"> ' + dert + '</a></li>'));
+        $(".ta-dert")[0].value = '';
       },
       fail: function failSaving() {
         console.log('Smt wrong...');
-        $("#p-dert-message")[0].innerHTML = "Dert sevme hatasi";
+        $("#p-dert-message")[0].innerHTML = "Dert sevme hatası, bi ara tekrar dene ya da deneme.";
       }
   });
 }
 
 function getLastDerts() {
   jQuery.ajax({
-      url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=10",
+      url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=20",
       success: function successfulSaving(data) {
         console.log('Got derts: ' + JSON.stringify(data));
         appendDertsToPage(data);
@@ -164,7 +166,7 @@ function getDertById(id) {
 
 function appendDertsToPage(lastDerts) {
   for (var i in lastDerts) {
-    $('.ul-last-derts').append($('<li><a href="/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
+    $('.ul-last-derts').append($('<li><a href="dert/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
   }
 }
 

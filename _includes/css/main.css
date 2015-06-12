@@ -363,3 +363,7 @@ nav ul li:hover, nav ul li.active {
 .div-last-derts {
   text-align: center;
 }
+
+button {
+  outline:none;
+}

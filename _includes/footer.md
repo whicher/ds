@@ -1,4 +1,4 @@
 
 &mdash;
-Design by Somebody
+Designed by Bir Dost
 &mdash;
