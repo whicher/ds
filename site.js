@@ -126,7 +126,7 @@ function saveDert(dert) {
       success: function successfulSaving(data) {
         console.log('Saved successfully...' + JSON.stringify(data));
         $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
-        $('.ul-last-derts').prepend($('<li><a href="dert/?q='+ data + '"> ' + dert + '</a></li>'));
+        $('.ul-last-derts').prepend($('<li><a href="/?q='+ data + '"> ' + dert['dert'] + '</a></li>'));
         $(".ta-dert")[0].value = '';
       },
       fail: function failSaving() {
@@ -166,7 +166,7 @@ function getDertById(id) {
 
 function appendDertsToPage(lastDerts) {
   for (var i in lastDerts) {
-    $('.ul-last-derts').append($('<li><a href="dert/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
+    $('.ul-last-derts').append($('<li><a href="/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
   }
 }
 
