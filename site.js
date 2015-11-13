@@ -183,9 +183,12 @@ function getDertById(id) {
         appendOneDertToPage(data);
 
         // Update the current url dynamically without reload.
+        CURRENT_URL = _SITE_URL + '/?q=' + id + '&d=' + slugify(data['dert']);
+        var shareUrlParam = '/url=' + escape(CURRENT_URL) + '&';
         $(".ul-share-menu").html($(".ul-share-menu").html().replace(
-            /URL_PLACEHOLDER/g, _SITE_URL + '/?q=' + id));
-        CURRENT_URL = _SITE_URL + '/?q=' + id;
+            /url=.*?&/g, shareUrlParam));
+        $(".a-share-fb").html($("#a-share-fb").html().replace(
+            /u=.*?/g, shareUrlParam));
         document.title = data['dert'] + ' | ' + _DEFAULT_TITLE;
       },
       fail: function failSaving() {
@@ -196,11 +199,17 @@ function getDertById(id) {
   })
 }
 
-
+function slugify(text) {
+  return text.toString().toLowerCase().trim()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/&/g, '-and-')         // Replace & with 'and'
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+}
 
 function appendDertsToPage(lastDerts) {
   for (var i in lastDerts) {
-    $('.ul-last-derts').prepend($('<li><a href="/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
+    $('.ul-last-derts').prepend($('<li><a href="/' + '?q='+ i + '&d=' + slugify(lastDerts[i]['dert']) + '">' + lastDerts[i]['dert'] + '</a></li>'));
   }
 }
 
