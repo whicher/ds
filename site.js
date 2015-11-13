@@ -107,6 +107,10 @@ $(document).ready(function (){
     }
   });
 
+  // Add default sharing option as root url.
+  $(".ul-share-menu").html($(".ul-share-menu").html().replace(
+      /URL_PLACEHOLDER/g, _SITE_URL));
+
   var params = getJsonFromUrl(window.location.href);
   if (_DEBUG) {
     console.log(JSON.stringify(params));
