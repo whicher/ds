@@ -1,6 +1,7 @@
 var _SITE_URL = 'http://derdinisikiyim.com';
 var CURRENT_URL = _SITE_URL;
 var _DEBUG = false;
+var _DEFAULT_TITLE = "Kolektif dert aparatı - derdini sikiyim butonu şurda bi yerde olacaktı";
 
 $.extend($.easing,
 {
@@ -110,6 +111,8 @@ $(document).ready(function (){
   // Add default sharing option as root url.
   $(".ul-share-menu").html($(".ul-share-menu").html().replace(
       /URL_PLACEHOLDER/g, _SITE_URL));
+  // Change title to default state.
+  document.title = _DEFAULT_TITLE;
 
   var params = getJsonFromUrl(window.location.href);
   if (_DEBUG) {
@@ -183,6 +186,7 @@ function getDertById(id) {
         $(".ul-share-menu").html($(".ul-share-menu").html().replace(
             /URL_PLACEHOLDER/g, _SITE_URL + '/?q=' + id));
         CURRENT_URL = _SITE_URL + '/?q=' + id;
+        document.title = data['dert'] + ' | ' + _DEFAULT_TITLE;
       },
       fail: function failSaving() {
         if (_DEBUG) {
