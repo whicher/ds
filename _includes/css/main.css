@@ -367,3 +367,18 @@ nav ul li:hover, nav ul li.active {
 button {
   outline:none;
 }
+
+.ul-share-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ul-share-menu li {
+    display: inline;
+    margin-left: 10px;
+}
+
+.a-share-option i:hover {
+    color: gray;
+}

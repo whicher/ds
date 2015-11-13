@@ -1,3 +1,6 @@
+var _SITE_URL = 'http://derdinisikiyim.com';
+var CURRENT_URL = _SITE_URL;
+var _DEBUG = false;
 
 $.extend($.easing,
 {
@@ -80,21 +83,23 @@ $(document).ready(function (){
 	});
 
     //links going to other sections nicely scroll
-	$(".container a").each(function(){
-        if ($(this).attr("href").charAt(0) == '#'){
-            $(this).on('click', function(event) {
-        		event.preventDefault();
-                var target = $(event.target).closest("a");
-                var targetHight =  $(target.attr("href")).offset().top
-            	$('html,body').animate({scrollTop: targetHight - 170}, 800, "easeInOutExpo");
-            });
-        }
-	});
+	// $(".container a").each(function(){
+ //        if ($(this).attr("href").charAt(0) == '#'){
+ //            $(this).on('click', function(event) {
+ //        		event.preventDefault();
+ //                var target = $(event.target).closest("a");
+ //                var targetHight =  $(target.attr("href")).offset().top
+ //            	$('html,body').animate({scrollTop: targetHight - 170}, 800, "easeInOutExpo");
+ //            });
+ //        }
+	// });
 
 	////////////
 	$("#btn-dert")[0].addEventListener("click", function(){
 	  var dert = $(".ta-dert")[0].value;
-	  console.log("Sevmeye basildi: " + dert);
+    if (_DEBUG) {
+  	  console.log("Sevmeye basildi: " + dert);
+    }
 	  if (dert === '') {
 	    $("#p-dert-message")[0].innerHTML = "Bir dert girmen lazim ama...";
 	  } else {
@@ -103,7 +108,9 @@ $(document).ready(function (){
   });
 
   var params = getJsonFromUrl(window.location.href);
-  console.log(JSON.stringify(params));
+  if (_DEBUG) {
+    console.log(JSON.stringify(params));
+  }
   if (params && params['q']) {
     getDertById(params['q']);
   }
@@ -113,7 +120,9 @@ $(document).ready(function (){
 });
 
 function saveDert(dert) {
-  console.log('Saving dert: ' + dert);
+  if (_DEBUG) {
+    console.log('Saving dert: ' + dert);
+  }
 
   jQuery.ajax({
       accept: "application/json",
@@ -124,13 +133,17 @@ function saveDert(dert) {
       url: "https://glowing-heat-3755.firebaseio.com/dert.json",
       data: JSON.stringify({"dert": dert, "tarih": new Date()}),
       success: function successfulSaving(data) {
-        console.log('Saved successfully...' + JSON.stringify(data));
+        if (_DEBUG) {
+          console.log('Saved successfully...' + JSON.stringify(data));
+        }
         $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
         $('.ul-last-derts').prepend($('<li><a href="/?q='+ data + '"> ' + dert['dert'] + '</a></li>'));
         $(".ta-dert")[0].value = '';
       },
       fail: function failSaving() {
-        console.log('Smt wrong...');
+        if (_DEBUG) {
+          console.log('Smt wrong...');
+        }
         $("#p-dert-message")[0].innerHTML = "Dert sevme hatası, bi ara tekrar dene ya da deneme.";
       }
   });
@@ -140,11 +153,15 @@ function getLastDerts() {
   jQuery.ajax({
       url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=20",
       success: function successfulSaving(data) {
-        console.log('Got derts: ' + JSON.stringify(data));
+        if (_DEBUG) {
+          console.log('Got derts: ' + JSON.stringify(data));
+        }
         appendDertsToPage(data);
       },
       fail: function failSaving() {
-        console.log('Smt wrong...');
+        if (_DEBUG) {
+          console.log('Smt wrong...');
+        }
       }
   })
 }
@@ -153,11 +170,20 @@ function getDertById(id) {
   jQuery.ajax({
       url: "https://glowing-heat-3755.firebaseio.com/dert/" + id + ".json",
       success: function successfulSaving(data) {
-        console.log('Got one dert: ' + JSON.stringify(data));
+        if (_DEBUG) {
+          console.log('Got one dert: ' + JSON.stringify(data));
+        }
         appendOneDertToPage(data);
+
+        // Update the current url dynamically without reload.
+        $(".ul-share-menu").html($(".ul-share-menu").html().replace(
+            /URL_PLACEHOLDER/g, _SITE_URL + '/?q=' + id));
+        CURRENT_URL = _SITE_URL + '/?q=' + id;
       },
       fail: function failSaving() {
-        console.log('Smt wrong...');
+        if (_DEBUG) {
+          console.log('Smt wrong...');
+        }
       }
   })
 }
@@ -166,7 +192,7 @@ function getDertById(id) {
 
 function appendDertsToPage(lastDerts) {
   for (var i in lastDerts) {
-    $('.ul-last-derts').append($('<li><a href="/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
+    $('.ul-last-derts').prepend($('<li><a href="/?q='+ i + '"> ' + lastDerts[i]['dert'] + '</a></li>'));
   }
 }
 
