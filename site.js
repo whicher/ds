@@ -151,7 +151,7 @@ function saveDert(dert) {
 
 function getLastDerts() {
   jQuery.ajax({
-      url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=20",
+      url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=40",
       success: function successfulSaving(data) {
         if (_DEBUG) {
           console.log('Got derts: ' + JSON.stringify(data));
