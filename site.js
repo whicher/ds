@@ -1,7 +1,12 @@
 var _SITE_URL = 'http://derdinisikiyim.com';
 var CURRENT_URL = _SITE_URL;
-var _DEBUG = false;
+var _DEBUG = true;
 var _DEFAULT_TITLE = "Kolektif dert aparatı - derdini sikiyim butonu şurda bi yerde olacaktı";
+var _DEFAULT_SHARE_MENU_HTML = '<li><a id="a-share-fb" class="a-share-option" tabindex="-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=URL_PLACEHOLDER"><i class="fa fa-facebook"></i></a></li>'+
+    '<li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://twitter.com/intent/tweet?text=TEXT_PLACEHOLDER&url=URL_PLACEHOLDER&via=derdinisikiyim"><i class="fa fa-twitter"></i></a></li>' +
+    '<li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://plus.google.com/share?url=URL_PLACEHOLDER"><i class="fa fa-google-plus"></i></a></li>' +
+    '<li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&mini=true&url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>' +
+    '<li><a class="a-share-option" tabindex="-1" onclick="window.prompt(\'Link aşağıda seçili ve kopyalamaya hazır\', \'URL_PLACEHOLDER\');"><i class="fa fa-clipboard"></i></a></li>';
 
 $.extend($.easing,
 {
@@ -104,7 +109,14 @@ $(document).ready(function (){
 	  if (dert === '') {
 	    $("#p-dert-message")[0].innerHTML = "Bir dert girmen lazim ama...";
 	  } else {
-      saveDert(dert);
+      if (_DEBUG) {
+        console.log('Dert lenght: ' + dert.lenth);
+      }
+      if (dert.length > 500) {
+        $("#p-dert-message")[0].innerHTML = "Derdin çok uzun dostum, durumumuz yoktu okuyamadık...";     
+      } else {
+        saveDert(dert);
+      }
     }
   });
 
@@ -143,8 +155,8 @@ function saveDert(dert) {
         if (_DEBUG) {
           console.log('Saved successfully...' + JSON.stringify(data));
         }
-        $("#p-dert-message")[0].innerHTML = "Derdin başarıyla sevildi";
-        $('.ul-last-derts').prepend($('<li><a href="/?q='+ data + '"> ' + dert['dert'] + '</a></li>'));
+        $("#p-dert-message")[0].innerHTML = "Derdin başarıyla uzaylandı";
+        $('.ul-last-derts').prepend($('<li><a href="/?q='+ data['name'] + '"> ' + dert.slice(0, 50) + '</a></li>'));
         $(".ta-dert")[0].value = '';
       },
       fail: function failSaving() {
@@ -183,12 +195,11 @@ function getDertById(id) {
         appendOneDertToPage(data);
 
         // Update the current url dynamically without reload.
-        CURRENT_URL = _SITE_URL + '/?q=' + id + '&d=' + slugify(data['dert']);
-        var shareUrlParam = '/url=' + escape(CURRENT_URL) + '&';
-        $(".ul-share-menu").html($(".ul-share-menu").html().replace(
-            /url=.*?&/g, shareUrlParam));
-        $(".a-share-fb").html($("#a-share-fb").html().replace(
-            /u=.*?/g, shareUrlParam));
+        CURRENT_URL = _SITE_URL + '/?q=' + id;
+        $(".ul-share-menu").html(_DEFAULT_SHARE_MENU_HTML.replace(
+            /URL_PLACEHOLDER/g, escape(CURRENT_URL)).replace(
+                'TEXT_PLACEHOLDER', data['dert']));
+
         document.title = data['dert'] + ' | ' + _DEFAULT_TITLE;
       },
       fail: function failSaving() {
