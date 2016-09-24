@@ -37,6 +37,70 @@
       <div class="container {{ page.style }}">
         {{ page.content }}
       </div> -->
+      <h1>Sizi gıcık eden dünyanın en önemli derdini girin!</h1>
+
+      <br />
+
+      <!-- Share button -->
+      <div class="div-share-button">
+        <ul class="ul-share-menu">
+          <li><a id="a-share-fb" class="a-share-option" tabindex="-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=URL_PLACEHOLDER"><i class="fa fa-facebook"></i></a></li>
+          
+          <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://twitter.com/intent/tweet?text=Dertler derya&url=URL_PLACEHOLDER&via=derdinisikiyim"><i class="fa fa-twitter"></i></a></li>
+          
+          <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://plus.google.com/share?url=URL_PLACEHOLDER"><i class="fa fa-google-plus"></i></a></li>
+          
+          <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&mini=true&url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>
+
+          <li><a class="a-share-option" tabindex="-1" onclick="window.prompt('Link aşağıda seçili ve kopyalamaya hazır', 'URL_PLACEHOLDER');"><i class="fa fa-clipboard"></i></a></li>
+        </ul>
+      </div>
+      <!-- /col-md-1 share button -->
+
+      <br /><br />
+
+      <p id="h3-write">Sen de yaz, neyin eksik:</p>
+
+      <p id="p-dert-message"></p>
+
+      <textarea class="ta-dert" name="query" cols="200" rows="10"></textarea>
+
+      <div>
+        <button id="btn-dert" type="button" class="btn btn-default btn-lg" value="derdini sikeyim butonu">
+          <!-- <span class="fa-stack subtlecircle" style="font-size:100px; background:rgba(255,166,0,0.1)">
+            <i class="fa fa-circle fa-stack-2x text-white"></i>
+            <i class="fa fa-wrench fa-stack-1x text-orange"></i>
+          </span> -->
+          <h4>Derdi Uzayla</h4>
+          <span class="fa-stack subtlecircle" style="font-size:50px; background:rgba(255,166,0,0.1)">
+            <i class="fa fa-rocket fa-stack-1x text-orange"></i>
+          </span>
+        </button>
+      </div>
+
+      <!-- Disqus comments -->
+      <div>
+        <div id="disqus_thread"></div>
+        <script>
+        /**
+        * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        var disqus_config = function () {
+        this.page.url = location.href;
+        this.page.identifier = location.href;
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//derdini.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
 
       <div class="div-last-derts">
         <hr />
