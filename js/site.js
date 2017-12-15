@@ -225,7 +225,7 @@ function appendDertsToPage(lastDerts) {
 }
 
 function appendOneDertToPage(dert) {
-  $('#sizi-gck-eden-dnyann-en-nemli-derdini-girin')[0].innerHTML = dert['dert'];
+  $('#h1-title')[0].innerHTML = dert['dert'];
 }
 
 function getJsonFromUrl() {
