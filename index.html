@@ -1,141 +1,166 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kolektif dert aparatı - derdini sikiyim butonu şurda bi yerde olacaktı</title>
-	<meta name="keywords" content="derdini sikiyim butonu, derdini sikeyim butonu">
-	<meta name="description" content="Dertsiz başlarına dert arayanlara yollayabileceğiniz bir buton, first world problem, dertleşme ortamı. Derdinizi yazmak derman bulmanın yarısıdır.">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/combo.css">
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-  <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-</head>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-<body>
+		<title>Kolektif dert aparatı - derdini sikiyim butonu şurda bi yerde olacaktı</title>
+		<meta name="keywords" content="derdini sikiyim butonu, derdini sikeyim butonu">
+		<meta name="description" content="Dertsiz başlarına dert arayanlara yollayabileceğiniz bir buton, first world problem, dertleşme ortamı. Derdinizi yazmak derman bulmanın yarısıdır.">
 
-  <audio id="myAudio">
-    <source src="derdini.mp4" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <div id="main" class="container">
-    <div id="{{id}}" class="section p-{{id}}">
-      <div class="row">
-        <h1><a href="javascript:play();" class="btn-push red">Derdini Sikiyim</a></h1>
-        <hr>
-        <h1 id="h1-title">Seni gıcık eden dünyanın en önemli derdini gir!</h1>
-        
-        <div class="col-md-5">
-          <br />
-          <!-- Share button -->
-          <div class="div-share-button">
-            <ul class="ul-share-menu">
-              <li><a id="a-share-fb" class="a-share-option" tabindex="-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=URL_PLACEHOLDER"><i class="fa fa-facebook"></i></a></li>
-              
-              <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://twitter.com/intent/tweet?text=Dertler derya&url=URL_PLACEHOLDER&via=derdinisikiyim"><i class="fa fa-twitter"></i></a></li>
-              
-              <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://plus.google.com/share?url=URL_PLACEHOLDER"><i class="fa fa-google-plus"></i></a></li>
-              
-              <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&mini=true&url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>
+    <!-- Custom styles for this template -->
+		<style>
+			body {
+				padding-top: 5rem;
+				text-align: center;
+			}
+			.starter-template {
+				padding: 3rem 1.5rem;
+				text-align: center;
+			}
+		</style>
+  </head>
 
-              <li><a class="a-share-option" tabindex="-1" onclick="window.prompt('Link aşağıda seçili ve kopyalamaya hazır', 'URL_PLACEHOLDER');"><i class="fa fa-clipboard"></i></a></li>
-            </ul>
-          </div>
-          <p id="h3-write">Sen de yaz, neyin eksik:</p>
-          <p id="p-dert-message"></p>
-          <div class="form-group" style="text-align: center;">
-            <textarea class="ta-dert form-control" name="query" cols="200" rows="5"></textarea>
-            <br>
-            <div>
-              <button id="btn-dert" type="button" class="btn btn-default btn-lg" value="derdini sikeyim butonu">
-                <!-- <span class="fa-stack subtlecircle" style="font-size:100px; background:rgba(255,166,0,0.1)">
-                  <i class="fa fa-circle fa-stack-2x text-white"></i>
-                  <i class="fa fa-wrench fa-stack-1x text-orange"></i>
-                </span> -->
-                <h4>Bu Derdi Sik</h4>
-                <span class="fa-stack subtlecircle" style="font-size:50px; background:rgba(255,166,0,0.1)">
-                  <i class="fa fa-rocket fa-stack-1x text-orange"></i>
-                </span>
-              </button>
-            </div>
-          </div>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="/">Derdini Sikiyim Butonu</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="row">
-            <a class="twitter-timeline"  href="https://twitter.com/hashtag/derdinisikeyim" data-widget-id="941723031952674822">#derdinisikeyim Tweets</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>          
-          </div>
-        </div>
-
-        <div class="col-md-7">
-          <div class="div-last-derts" style="text-align: left;">
-            <h3>Son Dertler</h3>
-            <ul class="ul-last-derts"></ul>
-          </div>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Ev <span class="sr-only">(current)</span></a>
+          </li>
+					<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="mailto:info@derdinisikiyim.com" 
+							 id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Iletisim	
+						</a>
+          </li>
+        </ul>
       </div>
+    </nav>
 
-      <!-- Disqus comments -->
-      <div>
-        <div id="disqus_thread"></div>
-        <script>
-        /**
-        * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-        */
-        var disqus_config = function () {
-        this.page.url = location.href;
-        this.page.identifier = location.href;
-        };
-        (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
+		<audio id="myAudio">
+			<source src="derdini.mp4" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
 
-        s.src = '//derdini.disqus.com/embed.js';
+    <main role="main" class="container">
+			<div id="main" class="container">
+				<div class="starter-template">
+					<p class="lead">
+						<h1>
+							<a href="javascript:play();" class="btn-push red">
+								<img src="img/derdini.png" class="responsive-img" width="300px" height="300px" alt="Derdini Sikeyim Butonu">
+							</a>
+						</h1>
+						<hr>
+						<h1 id="h1-title">Seni gıcık eden dünyanın en önemli derdini gir!</h1>
+					</p>
+				</div>
 
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-      </div>
-    </div>
+				<div id="{{id}}" class="section p-{{id}}">
+					<div class="row">
+						
+						<div class="col-md-5">
+							<br />
+							<p id="h3-write">Sen de yaz, neyin eksik:</p>
+							<p id="p-dert-message"></p>
+							<div class="form-group" style="text-align: center;">
+								<textarea class="ta-dert form-control" name="query" cols="200" rows="5"></textarea>
+								<br>
+								<div>
+									<button id="btn-dert" type="button" class="btn btn-default btn-lg" value="derdini sikeyim butonu">
+										<!-- <span class="fa-stack subtlecircle" style="font-size:100px; background:rgba(255,166,0,0.1)">
+											<i class="fa fa-circle fa-stack-2x text-white"></i>
+											<i class="fa fa-wrench fa-stack-1x text-orange"></i>
+										</span> -->
+										<h4>Bu Derdi Sik</h4>
+										<span class="fa-stack subtlecircle" style="font-size:50px; background:rgba(255,166,0,0.1)">
+											<i class="fa fa-rocket fa-stack-1x text-orange"></i>
+										</span>
+									</button>
+								</div>
+							</div>
 
-  </div>
+							<div class="row">
+								<a href="https://twitter.com/intent/tweet?button_hashtag=derdinisikeyim&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #derdinisikeyim</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+							</div>
+						</div>
 
-<div id="footer" class="section text-white">
-  <img src="https://i.hizliresim.com/V3bmDq.jpg" >
-  <div class="container">
-    &mdash;Designed by Bir Dost&mdash;
-  </div>
-</div>
+						<div class="col-md-7">
+							<div class="div-last-derts" style="text-align: left;">
+								<h3>Son Dertler</h3>
+								<ul class="ul-last-derts"></ul>
+							</div>
+						</div>
+					</div>
 
-<script type="text/javascript">
-  function play() {
-    console.log('playing');
-    var x = document.getElementById("myAudio"); 
-    x.play(); 
-  } 
-</script>
+					<!-- Disqus comments -->
+					<div>
+						<div id="disqus_thread"></div>
+						<script>
+						/**
+						* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+						* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+						*/
+						var disqus_config = function () {
+						this.page.url = location.href;
+						this.page.identifier = location.href;
+						};
+						(function() { // DON'T EDIT BELOW THIS LINE
+						var d = document, s = d.createElement('script');
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/site.js"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '{{ site.google_analytics_key }}']);
-  _gaq.push(['_trackPageview']);
+						s.src = '//derdini.disqus.com/embed.js';
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+						s.setAttribute('data-timestamp', +new Date());
+						(d.head || d.body).appendChild(s);
+						})();
+						</script>
+						<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+					</div>
+				</div>
 
-</body>
+			</div>
+
+			<div id="footer" class="section text-white">
+				<img src="https://i.hizliresim.com/V3bmDq.jpg" >
+				<div class="container">
+					&mdash;Designed by Bir Dost&mdash;
+				</div>
+			</div>
+    </main><!-- /.container -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			function play() {
+				console.log('playing');
+				var x = document.getElementById("myAudio"); 
+				x.play(); 
+			} 
+		</script>
+
+		<script src="/js/site.js"></script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-63953051-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-63953051-1');
+		</script>
+  </body>
 </html>
+

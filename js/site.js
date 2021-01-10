@@ -8,99 +8,7 @@ var _DEFAULT_SHARE_MENU_HTML = '<li><a id="a-share-fb" class="a-share-option" ta
     '<li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&mini=true&url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>' +
     '<li><a class="a-share-option" tabindex="-1" onclick="window.prompt(\'Link aşağıda seçili ve kopyalamaya hazır\', \'URL_PLACEHOLDER\');"><i class="fa fa-clipboard"></i></a></li>';
 
-$.extend($.easing,
-{
-    def: 'easeOutQuad',
-    easeInOutExpo: function (x, t, b, c, d) {
-        if (t==0) return b;
-        if (t==d) return b+c;
-        if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
-        return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
-    }
-});
-
-(function( $ ) {
-
-    var settings;
-    var disableScrollFn = false;
-    var navItems;
-    var navs = {}, sections = {};
-
-    $.fn.navScroller = function(options) {
-        settings = $.extend({
-            scrollToOffset: 170,
-            scrollSpeed: 800,
-            activateParentNode: true,
-        }, options );
-        navItems = this;
-
-        //attatch click listeners
-    	navItems.on('click', function(event){
-    		event.preventDefault();
-            var navID = $(this).attr("href").substring(1);
-            disableScrollFn = true;
-            activateNav(navID);
-            populateDestinations(); //recalculate these!
-        	$('html,body').animate({scrollTop: sections[navID] - settings.scrollToOffset},
-                settings.scrollSpeed, "easeInOutExpo", function(){
-                    disableScrollFn = false;
-                }
-            );
-    	});
-
-        //populate lookup of clicable elements and destination sections
-        populateDestinations(); //should also be run on browser resize, btw
-
-        // setup scroll listener
-        $(document).scroll(function(){
-            if (disableScrollFn) { return; }
-            var page_height = $(window).height();
-            var pos = $(this).scrollTop();
-            for (i in sections) {
-                if ((pos + settings.scrollToOffset >= sections[i]) && sections[i] < pos + page_height){
-                    activateNav(i);
-                }
-            }
-        });
-    };
-
-    function populateDestinations() {
-        navItems.each(function(){
-            var scrollID = $(this).attr('href').substring(1);
-            navs[scrollID] = (settings.activateParentNode)? this.parentNode : this;
-            sections[scrollID] = $(document.getElementById(scrollID)).offset().top;
-        });
-    }
-
-    function activateNav(navID) {
-        for (nav in navs) { $(navs[nav]).removeClass('active'); }
-        $(navs[navID]).addClass('active');
-    }
-})( jQuery );
-
-
 $(document).ready(function (){
-
-    $('nav li a').navScroller();
-
-    //section divider icon click gently scrolls to reveal the section
-	$(".sectiondivider").on('click', function(event) {
-    	$('html,body').animate({scrollTop: $(event.target.parentNode).offset().top - 50}, 400, "linear");
-	});
-
-    //links going to other sections nicely scroll
-	// $(".container a").each(function(){
- //        if ($(this).attr("href").charAt(0) == '#'){
- //            $(this).on('click', function(event) {
- //        		event.preventDefault();
- //                var target = $(event.target).closest("a");
- //                var targetHight =  $(target.attr("href")).offset().top
- //            	$('html,body').animate({scrollTop: targetHight - 170}, 800, "easeInOutExpo");
- //            });
- //        }
-	// });
-
-	////////////
 	$("#btn-dert")[0].addEventListener("click", function(){
 	  var dert = $(".ta-dert")[0].value;
     if (_DEBUG) {
@@ -120,15 +28,12 @@ $(document).ready(function (){
     }
   });
 
-  // Add default sharing option as root url.
-  $(".ul-share-menu").html($(".ul-share-menu").html().replace(
-      /URL_PLACEHOLDER/g, _SITE_URL));
   // Change title to default state.
   document.title = _DEFAULT_TITLE;
 
   var params = getJsonFromUrl(window.location.href);
   if (_DEBUG) {
-    console.log(JSON.stringify(params));
+    console.log('params: ', JSON.stringify(params));
   }
   if (params && params['q']) {
     getDertById(params['q']);
@@ -142,53 +47,57 @@ function saveDert(dert) {
   if (_DEBUG) {
     console.log('Saving dert: ' + dert);
   }
+	dert = dert.trim()
 
-  jQuery.ajax({
-      accept: "application/json",
-      method: "POST",
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      // dataType: "jsonp",
-      url: "https://glowing-heat-3755.firebaseio.com/dert.json",
-      data: JSON.stringify({"dert": dert, "tarih": new Date()}),
-      success: function successfulSaving(data) {
-        if (_DEBUG) {
-          console.log('Saved successfully...' + JSON.stringify(data));
-        }
-        $("#p-dert-message")[0].innerHTML = "Derdin başarıyla uzaylandı";
-        $('.ul-last-derts').prepend($('<li><a href="/?q='+ data['name'] + '"> ' + dert.slice(0, 50) + '</a></li>'));
-        $(".ta-dert")[0].value = '';
-      },
-      fail: function failSaving() {
-        if (_DEBUG) {
-          console.log('Smt wrong...');
-        }
-        $("#p-dert-message")[0].innerHTML = "Dert sevme hatası, bi ara tekrar dene ya da deneme.";
-      }
+  if (dert.length < 1) {
+		$("#p-dert-message")[0].innerHTML = "<b>Dert cok kisa olmadi bu sefer.</b>";
+		return;
+	}
+
+	jQuery.ajax({
+		accept: "application/json",
+		method: "POST",
+		type: "POST",
+		contentType: "application/json; charset=utf-8",
+		url: "https://glowing-heat-3755.firebaseio.com/dert.json",
+		data: JSON.stringify({"dert": dert, "tarih": new Date()}),
+		success: function successfulSaving(data) {
+			if (_DEBUG) {
+				console.log('Saved successfully...' + JSON.stringify(data));
+			}
+			$("#p-dert-message")[0].innerHTML = "<b>Derdin başarıyla sikildi</b>";
+			$('.ul-last-derts').prepend($('<li><a href="/?q='+ data['name'] + '"> ' + dert.slice(0, 120) + '</a></li>'));
+			$(".ta-dert")[0].value = '';
+		},
+		fail: function failSaving() {
+			if (_DEBUG) {
+				console.log('Smt wrong...');
+			}
+			$("#p-dert-message")[0].innerHTML = "Dert sevme hatası, bi ara tekrar dene ya da deneme.";
+		}
   });
 }
 
 function getLastDerts() {
-  jQuery.ajax({
-      url: "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=40",
-      success: function successfulSaving(data) {
+ 	jQuery.get(
+      "https://glowing-heat-3755.firebaseio.com/dert.json?orderBy=%22tarih%22&limitToLast=200",
+      function(data) {
         if (_DEBUG) {
-          console.log('Got derts: ' + JSON.stringify(data));
+          //console.log('Got derts: ' + JSON.stringify(data));
         }
         appendDertsToPage(data);
-      },
-      fail: function failSaving() {
-        if (_DEBUG) {
-          console.log('Smt wrong...');
-        }
-      }
-  })
+      })
+		.fail(function(){
+			if (_DEBUG) {
+				console.log('Smt wrong...');
+			}
+		});
 }
 
 function getDertById(id) {
-  jQuery.ajax({
-      url: "https://glowing-heat-3755.firebaseio.com/dert/" + id + ".json",
-      success: function successfulSaving(data) {
+  jQuery.get(
+      "https://glowing-heat-3755.firebaseio.com/dert/" + id + ".json",
+      function(data) {
         if (_DEBUG) {
           console.log('Got one dert: ' + JSON.stringify(data));
         }
@@ -199,15 +108,9 @@ function getDertById(id) {
         $(".ul-share-menu").html(_DEFAULT_SHARE_MENU_HTML.replace(
             /URL_PLACEHOLDER/g, escape(CURRENT_URL)).replace(
                 'TEXT_PLACEHOLDER', data['dert']));
-
         document.title = data['dert'] + ' | ' + _DEFAULT_TITLE;
-      },
-      fail: function failSaving() {
-        if (_DEBUG) {
-          console.log('Smt wrong...');
-        }
       }
-  })
+	);
 }
 
 function slugify(text) {
@@ -218,14 +121,22 @@ function slugify(text) {
     .replace(/\-\-+/g, '-');        // Replace multiple - with single -
 }
 
+function htmlEncode(value){ 
+  return $('<div/>').text(value).html(); 
+}
+
 function appendDertsToPage(lastDerts) {
   for (var i in lastDerts) {
-    $('.ul-last-derts').prepend($('<li><a href="/' + '?q='+ i + '&d=' + slugify(lastDerts[i]['dert']) + '">' + lastDerts[i]['dert'] + '</a></li>'));
+		var dertText = htmlEncode(lastDerts[i]['dert'].trim());
+    if (dertText.length < 1) {
+			continue;
+		}
+    $('.ul-last-derts').prepend($('<li><a href="/' + '?q='+ i + '&d=' + slugify(dertText) + '">' + dertText + '</a></li>'));
   }
 }
 
 function appendOneDertToPage(dert) {
-  $('#h1-title')[0].innerHTML = dert['dert'];
+  $('#h1-title').text(dert['dert']);
 }
 
 function getJsonFromUrl() {
