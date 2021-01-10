@@ -66,7 +66,7 @@ function saveDert(dert) {
 				console.log('Saved successfully...' + JSON.stringify(data));
 			}
 			$("#p-dert-message")[0].innerHTML = "<b>Derdin başarıyla sikildi</b>";
-			$('.ul-last-derts').prepend($('<li><a href="/?q='+ data['name'] + '"> ' + dert.slice(0, 120) + '</a></li>'));
+			$('.ul-last-derts').prepend($('<li><a href="/?q='+ data['name'] + '"> ' + htmlEncode(dert.slice(0, 120)) + '</a></li>'));
 			$(".ta-dert")[0].value = '';
 		},
 		fail: function failSaving() {
