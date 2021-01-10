@@ -1,32 +1,24 @@
----
-title: "home"
-bg: white
-color: black
-style: center
----
+I"<h1 class="text-purple" id="seni-gıcık-eden-dünyanın-en-önemli-derdini-gir">Seni gıcık eden dünyanın en önemli derdini gir!</h1>
 
-# Seni gıcık eden dünyanın en önemli derdini gir!
-{: .text-purple}
-
-<br />
+<p><br /></p>
 
 <!-- Share button -->
 <div class="div-share-button">
   <ul class="ul-share-menu">
     <li><a id="a-share-fb" class="a-share-option" tabindex="-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=URL_PLACEHOLDER"><i class="fa fa-facebook"></i></a></li>
     
-    <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://twitter.com/intent/tweet?text=Dertler derya&url=URL_PLACEHOLDER&via=derdinisikiyim"><i class="fa fa-twitter"></i></a></li>
+    <li><a class="a-share-option" tabindex="-1" target="_blank" href="https://twitter.com/intent/tweet?text=Dertler derya&amp;url=URL_PLACEHOLDER&amp;via=derdinisikiyim"><i class="fa fa-twitter"></i></a></li>
     
-    <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://plus.google.com/share?url=URL_PLACEHOLDER"><i class="fa fa-google-plus"></i></a></li>
+    <li><a class="a-share-option" tabindex="-1" target="_blank" href="https://plus.google.com/share?url=URL_PLACEHOLDER"><i class="fa fa-google-plus"></i></a></li>
     
-    <li><a class="a-share-option" tabindex="-1"  target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&mini=true&url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>
+    <li><a class="a-share-option" tabindex="-1" target="_blank" href="https://www.linkedin.com/shareArticle?summary=Dertler derya&amp;mini=true&amp;url=URL_PLACEHOLDER"><i class="fa fa-linkedin"></i></a></li>
 
     <li><a class="a-share-option" tabindex="-1" onclick="window.prompt('Link aşağıda seçili ve kopyalamaya hazır', 'URL_PLACEHOLDER');"><i class="fa fa-clipboard"></i></a></li>
   </ul>
 </div>
 <!-- /col-md-1 share button -->
 
-<br /><br />
+<p><br /><br /></p>
 
 <p id="h3-write">Sen de yaz, neyin eksik:</p>
 
@@ -71,4 +63,4 @@ style: center
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 </div>
 
-{: .text-purple}
+:ET
